@@ -18,14 +18,14 @@ have a [virtualenv](https://python-guide.readthedocs.io/en/latest/dev/virtualenv
 set up, clone the git repository and install the package:
 
 ```bash
-$ git clone https://github.com/alephdata/corpint.git
-$ cd corpint
-$ pip install -e .
+$ git clone https://github.com/YoshaNir/Cluster-OSINT.git
+$ cd Cluster-OSINT
+$ pip install Cluster-OSINT.whl .
 ```
 
 ## Usage
 
-Most of the usage of ``corpint`` is handled via a command-line utility, which
+Most of the usage of ``Cluster-OSINT`` is handled via a command-line utility, which
 allows users to enrich data from external sources, find duplicates proposed for
 merging and generate output formats such as a Neo4J graph.
 

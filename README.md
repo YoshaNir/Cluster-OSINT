@@ -24,14 +24,14 @@ have a [virtualenv](https://python-guide.readthedocs.io/en/latest/dev/virtualenv
 set up, clone the git repository and install the package:
 
 ```bash
-$ git clone https://github.com/YoshaNir/Cluster-OSINT.git
-$ cd Cluster-OSINT
-$ pip install Cluster-OSINT.whl .
+$ git clone https://github.com/YoshaNir/OSINT-Enrichment.git
+$ cd OSINT-Enrichment
+$ python IPsEnrichment.py 
 ```
 
 ## Usage
 
-Most of the usage of ``Cluster-OSINT`` is handled via a command-line utility, which
+Most of the usage of ``OSINT-Enrichment`` is handled via a command-line utility, which
 allows users to enrich data from external sources, find duplicates proposed for
 merging and generate output formats such as a Neo4J graph.
 
@@ -40,88 +40,7 @@ merging and generate output formats such as a Neo4J graph.
 Some configuration is required to make  connect to the correct
 database and to the right subset of the data in there.
 
-* ``CORPINT_PROJECT`` is the title of the current investigation, in a slug
-  form, e.g. ``foo`` or ``panama_papers``.
-* ``DATABASE_URI`` is an environment variable containing a database connection
-  URI of the form ``postgresql://user:password@host/database``.
-* ``NEO4J_URI`` is the URL for Neo4J, usually
-  ``http://neo4j:neo4j@localhost:7474/``.
 
-### Loading data
-
-Loading data still requires some manual mapping of the data into
-the structure expected by ``corpint``. This can be done via a Python script:
-
-```python
-from corpint import project, csv
-from corpint import PERSON, COMPANY
-
-# name the source, used to distinguish from enrichment results:
-origin = project.origin('mysource')
-# delete previous load:
-origin.clear()
-
-# lets assume a data file with the names of companies and their directors
-with open('data.csv', 'r') as fh:
-  for row in csv(fh):
-    # get a row:
-    director_name = row.get('director_name')
-    # important: you need to generate unique IDs (uids) for each entity you
-    # load.
-    director_id = origin.uid(director_name)
-
-    # check for empty names:
-    if director_id is not None:
-      origin.emit_entity({
-        'uid': director_id,
-        'name': director_name,
-        'schema': PERSON,
-        # this will enable company look-ups for the entity:
-        'tasked': True
-      })
-
-    # same for the companies
-    company_name = row.get('company_name')
-    company_id = origin.uid(company_name)
-    if company_id is not None:
-      origin.emit_entity({
-        'uid': company_id,
-        'name': company_name,
-        'schema': Company,
-        # maybe add an extra property:
-        'country': row.get('company_country'),
-        'tasked': True
-      })
-
-    # now, create a link:
-    if company_id is not None and director_id is not None:
-      origin.emit_link({
-        'source_uid': director_id,
-        'target_uid': company_id,
-        'schema': 'DIRECTOR',
-        'summary': row.get('director_role')
-      })
-
-```
-
-### Cleaning up the data
-
-Once the data is loaded, you might want to start by checking if there are
-duplicates within the source list:
-
-```bash
-$ corpint mappings generate -o mysource -t 0.8
-```
-
-This will generate all duplicate candidates with a ranking better than 80%.
-
-You can then go and use the web interface to manually cross-check duplicates:
-
-```bash
-$ corpint webui
-```
-
-This will expose the web interface on port 5000 of the local machine.
 
 ### Enriching data from external sources
 

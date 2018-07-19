@@ -47,7 +47,7 @@ To run all the loaded entities against an online source, such as OpenCorporates,
 and store the resulting matches, run the following command:
 
 ```bash
-$ corpint enrich -o mysource opencorporates
+$ OSINT-Enrichment.py enrich -o mysource opencorporates
 ```
 
 Valid enrichers currently include ``opencorporates``, ``aleph``,

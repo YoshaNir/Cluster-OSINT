@@ -1,5 +1,11 @@
-# Cluster-OSINT
-Corporate open-source intelligence toolkit for data-driven investigations.
+# OSINT-Enrichment
+
+This repository contains all the material from the talk "OSINT and my quest for Grouping" given at Bsides 
+
+ct.py.pdf - Extract sub-domains for a given domain using crt.sh RSS feed
+censys.py - Extract sub-domains for a given domain using Censys.io API
+doing_recon_like_its_2017.pdf - Slides from the talk
+
 
 A common use case in investigative reporting is to research a given set of companies
 or people by searching for their ownership, control and other relationships in

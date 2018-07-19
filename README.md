@@ -2,24 +2,23 @@
 
 This repository contains all the material from the talk "OSINT and my quest for Grouping" given at Bsides 
 
-ct.py.pdf - Extract sub-domains for a given domain using crt.sh RSS feed
-censys.py - Extract sub-domains for a given domain using Censys.io API
-doing_recon_like_its_2017.pdf - Slides from the talk
+1. IPsEnrichment.py - Extract IP location, ASN and owners into subgroups
+2. DomainsEnrichment.py - Extract top-level-domains and domain length into subgroups
+3. MaliciousIPs and MaliciousDomains - OSINT list from AlienVault and Abuce.ch from Feb-May 2018
 
 
 A common use case in investigative reporting is to research a given set of companies
 or people by searching for their ownership, control and other relationships in
-online databases. ``corpint`` augments that process by automating look-ups in
-web services and building a network graph out of the resulting set of links. It
+online databases. ``OSINT-Enrichment`` augments that process by automating look-ups. It
 also provides an explicit way to accept and reject results from online research,
-thus making sure the entire resulting graph is fact-checked.
+thus making sure the entire noise and unreletaed information can be dropped.
 
 ## Installation
 
-To run ``corpint`` you will want to have Python and PostgreSQL installed. You
-may also want to install Neo4J if you intend to use the graph exporter feature.
+To run ``OSINT-Enrichment`` you will want to have Python and pandas library installed. You
+may also want to install ``numpy and matplotlib`` if you intend to use the graph exporter feature.
 
-It's recommended to run ``corpint`` inside a Python virtual environment. When you
+It's recommended to run ``OSINT-Enrichment`` inside a Python virtual environment. When you
 have a [virtualenv](https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/)
 set up, clone the git repository and install the package:
 
